@@ -1,0 +1,10 @@
+[user]
+	email = jon@accidental.cc
+	name = Jonathan Raphaelson
+
+[core]
+    excludesfile = $DOTFILES/git/gitignore
+
+[push]
+	default = simple
+
