@@ -1,0 +1,95 @@
+set nocompatible
+filetype off
+
+set rtp+=~/local/dotfiles/vim
+set rtp+=~/local/dotfiles/vim/bundle/vundle
+call vundle#begin("~/local/dotfiles/vim/bundle")
+
+"""""""""" plugins
+Plugin 'gmarik/vundle'
+
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'Shougo/vimproc'
+Plugin 'b4winckler/vim-angry'
+Plugin 'kshenoy/vim-signature'
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
+
+" languages and such
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'pangloss/vim-javascript'
+" Plugin 'wookiehangover/jshint.vim'
+Plugin 'wting/rust.vim'
+
+" color themes
+Plugin 'gregsexton/Atom'
+Plugin 'vim-scripts/proton'
+Plugin 'vim-scripts/Cleanroom'
+Plugin 'abra/vim-abra'
+Plugin 'blerins/flattown'
+
+call vundle#end()
+filetype plugin indent on
+
+"""""""""" options
+syntax on
+set smarttab
+set autoindent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set scroll=10
+set number
+set numberwidth=3
+
+"""""""""" theme stuff
+if has('gui_running')
+    colorscheme flattown
+
+    set guifont=Inconsolata\ Medium\ 16
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=r
+endif
+
+"""""""""" plugin config
+let g:neocomplete#enable_at_startup = 1
+let g:agprg="ag --column --smart-case --literal --follow"
+
+"""""""""" mappings
+let mapleader = "\<Space>"
+
+" switch [b]buffers
+nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>o :CtrlPCurWD<CR>
+
+" open [n]erdtree
+nnoremap <Leader>n :NERDTreeToggle<CR>
+
+" find the word under cursor (or visual) with `ag`
+nnoremap <Leader># "zyiw:exe ":Ag ".@z.""<CR>
+
+" leader + yank = system clipboard
+vnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+
+"""""""""" functions and autos
+
+" reload vimrc when it's saved
+augroup vimrc
+	au!
+	au BufWritePost .vimrc,vimrc.,vimrc.symlink so $MYVIMRC
+augroup end
+
