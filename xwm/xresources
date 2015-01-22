@@ -1,0 +1,49 @@
+URxvt.scrollBar: false
+URxvt.internalBorder:10
+URxvt.externalBorder:0
+URxvt.geometry: 100x24
+
+!Xft.dpi:        138
+!Xft.antialias:  true
+!Xft.rgba:       rgb
+!Xft.hinting:    true
+!Xft.hintstyle:  hintslight
+
+URxvt.font: xft:Fira Mono:regular:pixelsize=11
+URxvt.boldFont: xft:Fira Mono:bold:pixelsize=11
+URxvt.letterSpace: -2
+
+*.background: #0f0f0f
+*.foreground: #fffadf
+
+!black
+*color0:#4A3637
+*color8:#4A3637
+
+!red
+*color1:#bd4932
+*color9:#bd4932
+
+!green
+*color2:#10a660
+*color10:#10a660
+
+!yellow
+*color3:#ffd34e
+*color11:#ffd34e
+
+!blue
+*color4:#105B63
+*color12:#105B63
+
+!magenta
+*color5:#4A3637
+*color13:#4A3637
+
+!cyan
+*color6:#1a946c
+*color14:#1a946c
+
+!white
+*color7:#fffad5
+*color15:#fffad5
