@@ -1,0 +1,3 @@
+PROFILE=`readlink $HOME/.profile`
+export DOTFILES=`dirname $PROFILE`
+
