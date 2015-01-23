@@ -1,5 +1,11 @@
 export DOTFILES=`dirname $(readlink $HOME/.profile)`
 
+# add dotfiles to path
+export PATH="$DOTFILES/bin:$PATH"
+
+# enable binaries in local node_modules
+export PATH="$PATH:./node_modules/.bin"
+
 # enable rvm
 export RVM_HOME="$HOME/.rvm"
 export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin:$RVM_HOME/bin"

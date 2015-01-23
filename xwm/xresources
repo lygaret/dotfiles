@@ -1,7 +1,6 @@
 URxvt.scrollBar: false
 URxvt.internalBorder:10
 URxvt.externalBorder:0
-URxvt.geometry: 100x24
 
 !Xft.dpi:        138
 !Xft.antialias:  true
@@ -11,7 +10,6 @@ URxvt.geometry: 100x24
 
 URxvt.font: xft:Fira Mono:regular:pixelsize=11
 URxvt.boldFont: xft:Fira Mono:bold:pixelsize=11
-URxvt.letterSpace: -2
 
 *.background: #0f0f0f
 *.foreground: #fffadf
