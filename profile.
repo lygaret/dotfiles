@@ -1,3 +1,6 @@
-PROFILE=`readlink $HOME/.profile`
-export DOTFILES=`dirname $PROFILE`
+export DOTFILES=`dirname $(readlink $HOME/.profile)`
 
+# enable rvm
+export RVM_HOME="$HOME/.rvm"
+export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin:$RVM_HOME/bin"
+[[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"
