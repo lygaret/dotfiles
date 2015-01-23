@@ -1,0 +1,30 @@
+#!/bin/sh
+
+user='jon@jnthn.io'
+clearafter=15
+
+login() {
+    if !$lpass login $user; then
+        exit 1
+    fi
+}
+
+# login if ls didn't work
+if !$lpass ls 2> /dev/null; then
+    login
+fi
+
+# use dmenu to select the entry
+selected_entry=$(lpass ls | egrep "[A-Za-z0-9]+\s\[id: [0-9]+\]" | sed -r 's/^(.*) \[id.*\]$/\1/' | dmenu -i)
+
+# clip password to clip board
+lpass show --clip --password "${selected_entry}"
+
+# copy clipboard to primary
+xsel -b | xsel -p -i
+
+# clear the clipboard eventually
+sleep $clearafter
+xsel -b -c
+xsel -p -c
+
