@@ -1,4 +1,5 @@
 export DOTFILES=`dirname $(readlink $HOME/.profile)`
+export EDITOR=vim
 
 # add dotfiles to path
 export PATH="$DOTFILES/bin:$PATH"
@@ -6,7 +7,6 @@ export PATH="$DOTFILES/bin:$PATH"
 # enable binaries in local node_modules
 export PATH="$PATH:./node_modules/.bin"
 
-# enable rvm
+# rvm
 export RVM_HOME="$HOME/.rvm"
 export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin:$RVM_HOME/bin"
-[[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"

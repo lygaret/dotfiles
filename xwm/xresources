@@ -1,15 +1,16 @@
 URxvt.scrollBar: false
-URxvt.internalBorder:10
+URxvt.internalBorder:5
 URxvt.externalBorder:0
+URxvt.lineSpace:3
 
 !Xft.dpi:        138
 !Xft.antialias:  true
-!Xft.rgba:       rgb
+!Xft.rgba:       rgba
 !Xft.hinting:    true
 !Xft.hintstyle:  hintslight
 
-URxvt.font: xft:Fira Mono:regular:pixelsize=11
-URxvt.boldFont: xft:Fira Mono:bold:pixelsize=11
+URxvt.font: xft:Source Code Pro for Powerline:pixelsize=13
+URxvt.boldFont: xft:Source Code Pro for Powerline:pixelsize=13:bold
 
 *.background: #0f0f0f
 *.foreground: #fffadf
