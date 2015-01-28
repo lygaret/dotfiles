@@ -1,0 +1,12 @@
+# dotfiles
+
+Run `./bin/dotfiles` to install. Will prompt for overwrites.
+
+`dotfiles` will link anything in this directory with a name
+which ends with a dot (.):
+
+  * if it is a directory, it will be linked, without the dot, 
+    in `$XDG_CONFIG_HOME`, or `$HOME/.config` by default.
+
+  * if it is a regular file, it will be linked into `$HOME`, with
+    the dot moved to the front.
