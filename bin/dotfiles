@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # install all the things
 
-DOTFILES="`pwd`"
+DOTFILES=`dirname $(dirname $(realpath -s $0))`
 
 info () {
 	printf "\r\033[2K [   \033[00;34m.\033[0m] $1\n"
