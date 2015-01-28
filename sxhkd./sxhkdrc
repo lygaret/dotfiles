@@ -1,0 +1,54 @@
+# syntax cheatsheet
+#
+# HOTKEY
+#   COMMAND
+#
+# HOTKEY        := CHORD [;|: CHORD]*
+# CHORD         := [MODIFIER] [@|!|~]KEYSYM
+# MODIFIER      := MODIFIER [+ MODIFIER]*
+#
+# when chords seperated by \;, that's a multi-key chord
+# when chords seperated by \:, the chain is maintained until Escape
+# eg.
+#   // press super + o, then e, w, or m. the program runs, the chord is done
+#   super + o ; {e, w, m}
+#       { gvim, chromium, thunderbird }
+#   
+#   // press super + r, then hjkl, hjkl still in mode until escape
+#   super + m : {h,j,k,l}
+#       xdo move {-x -5, -y + 5, -y -5, -x +5}
+#
+# \_ can be a placeholder for 'nothing' in key sets 
+#
+#   // press the brightness down or up key, alone or with shift
+#   {_, shift +} XF86MonBrightness{Down, Up}
+#       xbacklight { -dec 5, -dec 15, -inc 5 -inc 15 }
+
+{_,shift + }XF86MonBrightness{Down,Up}
+    xbacklight { -dec 5, -dec 15, -inc 5 -inc 15 }
+
+super + alt + Escape
+    bspc quit
+
+alt + Return
+    urxvt
+
+alt + space
+    lighthouse | sh
+
+# mouse actions
+
+~button1
+    bspc pointer -g focus
+
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + @button{1-3}
+    bspc pointer -u
+
+super + Escape
+    pkill -USR1 -x sxhkd

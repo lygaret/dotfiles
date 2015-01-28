@@ -5,14 +5,11 @@ antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle colored-man
-antigen bundle command-not-found
-antigen bundle catimg
-antigen bundle git
-antigen bundle ruby
-
 antigen theme $DOTFILES/zsh local/termparty
 antigen apply
 
 # rvm as a function
-# (here too, because we don't tend to use login shells)
 [[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"
+
+# aliases
+alias gs='git status'

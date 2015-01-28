@@ -1,0 +1,12 @@
+[Unit]
+Description=encfs
+After=local-fs.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/encfs -f --extpass=$SSH_ASKPASS -i 10 --ondemand --delaymount /home/jonathan/sync/crypt /home/jonathan/.local/crypt
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

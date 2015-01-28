@@ -22,7 +22,7 @@ fail () {
 }
 
 link_files () {
-	ln -s $1 $2
+ 	ln -s $1 $2
 	success "linked $1 to $2"
 }
 
@@ -38,9 +38,17 @@ install_dotfiles () {
 	backup_all=false
 	skip_all=false
 
+    # find files named with a dot at the end, link those with a dot at the beginning
 	for source in `find $DOTFILES -maxdepth 2 -name \*.`
 	do
-		dest="$HOME/.`basename \"${source%.*}\"`"
+        # if it's a directory, it goes in .config
+        if [ -d $source ]
+        then
+            config=${XDG_CONFIG_HOME:="$HOME/.config"}
+            dest="$config/`basename \"${source%.*}\"`"
+        else
+		    dest="$HOME/.`basename \"${source%.*}\"`"
+        fi
 
 		# if it's already correct, skip
 		if [ -L $dest ] && [ "$(readlink $dest)" = "$source" ]

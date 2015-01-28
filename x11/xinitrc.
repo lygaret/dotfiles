@@ -26,4 +26,7 @@ xrdb -load $DOTFILES/xwm/xresources
 # - ssh-agent?
 # - polkit?
 
-exec i3
+# exec i3
+
+sxhkd &
+exec bspwm
