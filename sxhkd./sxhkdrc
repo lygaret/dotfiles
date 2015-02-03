@@ -24,17 +24,49 @@
 #   {_, shift +} XF86MonBrightness{Down, Up}
 #       xbacklight { -dec 5, -dec 15, -inc 5 -inc 15 }
 
-{_,shift + }XF86MonBrightness{Down,Up}
-    xbacklight { -dec 5, -dec 15, -inc 5 -inc 15 }
-
-super + alt + Escape
-    bspc quit
+# tasks
 
 alt + Return
     urxvt
 
 alt + space
     lighthouse | sh
+
+### desktops
+
+    # enable desktop 0-9
+alt + d ; {0-9}
+    bspc desktop -f ^{0-9}
+
+    # alias above, since we might roll the keys
+alt + d ; alt + {0-9}
+    bspc desktop -f ^{0-9}
+
+    # toggle between last desktops
+alt + d ; alt + d
+    bspc desktop -f last
+
+    # app specific workspaces
+alt + d ; alt + m
+    bspc desktop -f m
+
+alt + d ; alt + c
+    bspc desktop -f c
+
+### windows
+
+    # close the current window
+alt + w ; q
+    bspc window -k
+
+    # toggle between last windows
+alt + w ; alt + w
+    bspc window -f last
+
+# extra keys
+
+{_,shift + }XF86MonBrightness{Down,Up}
+    backlight { -dec 5, -dec 15, -inc 5, -inc 15 }
 
 # mouse actions
 
@@ -50,5 +82,10 @@ super + !button{1-3}
 super + @button{1-3}
     bspc pointer -u
 
+# meta
+
 super + Escape
     pkill -USR1 -x sxhkd
+
+super + alt + Escape
+    bspc quit

@@ -10,3 +10,6 @@ export PATH="$PATH:./node_modules/.bin"
 # rvm
 export RVM_HOME="$HOME/.rvm"
 export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin:$RVM_HOME/bin"
+
+# w3m puts utils in weird places
+export PATH="$PATH:/usr/lib/w3m"

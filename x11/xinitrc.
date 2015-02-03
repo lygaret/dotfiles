@@ -19,7 +19,7 @@ xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
 xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 
 # visual themes
-xrdb -load $DOTFILES/xwm/xresources
+xrdb -load $DOTFILES/x11/xresources
 
 # session stuff
 # - systray, applets, copy.com, etc.
@@ -27,6 +27,10 @@ xrdb -load $DOTFILES/xwm/xresources
 # - polkit?
 
 # exec i3
+
+compton &
+. ~/.fehbg
+$DOTFILES/bin/backlight restore
 
 sxhkd &
 exec bspwm

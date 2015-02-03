@@ -1,0 +1,9 @@
+[Unit]
+Description=mopidy
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/udiskie
+
+[Install]
+WantedBy=multi-user.target

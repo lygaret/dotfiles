@@ -9,11 +9,14 @@ URxvt.lineSpace:3
 !Xft.hinting:    true
 !Xft.hintstyle:  hintslight
 
+*.background: #0f0f0f
+*.foreground: #fffadf
+
 URxvt.font: xft:Source Code Pro for Powerline:pixelsize=13
 URxvt.boldFont: xft:Source Code Pro for Powerline:pixelsize=13:bold
 
-*.background: #0f0f0f
-*.foreground: #fffadf
+URxvt.depth: 32
+URxvt.background: [90]#0f0f16
 
 !black
 *color0:#4A3637

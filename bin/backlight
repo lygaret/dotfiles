@@ -1,0 +1,13 @@
+#!/bin/sh
+
+restore_file="$HOME/.backlight"
+
+case "$1" in
+    "restore")
+        [[ -e $restore_file ]] && cat $restore_file | xargs xbacklight -set
+        ;;
+    *)
+        xbacklight $@
+        xbacklight -get > ~/.backlight
+esac
+

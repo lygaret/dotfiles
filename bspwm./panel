@@ -1,0 +1,27 @@
+#! /bin/sh
+
+COLOR_FOREGROUND='#FFFFFFFF'
+COLOR_BACKGROUND='#00000000'
+
+PANEL_FIFO='/tmp/panel-fifo'
+PANEL_HEIGHT=16
+PANEL_FONT_FAMILY="terminus"
+
+if [ $(pgrep -cx panel) -gt 1 ]; then
+    printf "%s\n" "the panel is already running." >&2
+fi
+
+# trap 'trap -TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+
+bspc control --subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+battery -sf 'X%s %i'  > "$PANEL_FIFO" &
+
+exec cat "$PANEL_FIFO" | $DOTFILES/bspwm./panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
+# exec cat "$PANEL_FIFO" | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
