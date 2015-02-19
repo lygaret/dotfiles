@@ -15,8 +15,18 @@ function job_status_color() {
     echo "%(1j,$info,$normal)"
 }
 
+function precmd {
+    if [ "$LAST_PWD" != "$PWD" ]; then
+        PWD_STR="%{$fg[white]%} %~"
+    else
+        PWD_STR=""
+    fi
+
+    LAST_PWD="$PWD"
+}
+
 PROMPT='$(exit_status_color)#$(vi_mode_color)#%{$reset_color%} '
-RPS1='%{$fg[white]%}%2~$(git_prompt_info)'
+RPS1='$(git_prompt_info)$PWD_STR'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
