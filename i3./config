@@ -70,7 +70,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+9 workspace 9: slack
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
@@ -82,7 +82,7 @@ bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+9 move container to workspace 9: slack
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
@@ -123,6 +123,24 @@ bar {
     status_command i3status
 }
 
+# system (non-wm related) binds
+
+bindsym XF86MonBrightnessUp exec --no-startup-id backlight +5
+bindsym XF86MonBrightnessDown exec --no-startup-id backlight -5
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id backlight +15
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id backlight -15
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up 15
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down 15
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
+
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
 # special "non-contextual" apps
 
 bindsym Mod1+Mod4+m [con_mark="music"] scratchpad show
@@ -132,3 +150,10 @@ exec spotify
 bindsym Mod1+Mod4+c [con_mark="chat"] scratchpad show
 for_window [class="Pidgin" window_role="buddy_list"] mark "chat", move scratchpad
 exec pidgin
+
+# we don't auto start slack, but it'll work like the others
+bindsym Mod1+Mod4+w [con_mark="slack"] scratchpad show
+for_window [title="Slack"] mark "slack", move scratchpad
+
+for_window [class="Skype"] floating enable, border normal
+

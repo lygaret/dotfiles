@@ -39,13 +39,18 @@ install_dotfiles () {
 	skip_all=false
 
     # find files named with a dot at the end, link those with a dot at the beginning
+    # two dots at the end means put it in .config without the dot
 	for source in `find $DOTFILES -maxdepth 2 -name \*.`
 	do
+        config=${XDG_CONFIG_HOME:="$HOME/.config"}
+
         # if it's a directory, it goes in .config
-        if [ -d $source ]
+        if [[ -d "$source" ]]
         then
-            config=${XDG_CONFIG_HOME:="$HOME/.config"}
             dest="$config/`basename \"${source%.*}\"`"
+        elif [[ $source = *.. ]]
+        then
+		    dest="$config/`basename \"${source%..*}\"`"
         else
 		    dest="$HOME/.`basename \"${source%.*}\"`"
         fi

@@ -2,3 +2,5 @@ vim/bundle
 systemd./user/multi-user.target.wants
 /bin/Makefile
 /bin/fontlist.c
+\#*
+.#*

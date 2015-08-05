@@ -12,6 +12,5 @@ URxvt.lineSpace:3
 URxvt.depth: 32
 URxvt.font: xft:Fira Mono:pixelsize=10
 
-!URxvt.background: [90]#021b21
 #include </home/jonathan/.dotfiles/x11/colors/material>
-URxvt.background: #263238
+URxvt.background: [90]#263238
