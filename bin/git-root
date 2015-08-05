@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+git_root() {
+    git rev-parse --show-toplevel
+}
+
+git_root_rel() {
+    git rev-parse --show-prefix
+}
+
+if test $# -eq 0; then
+    git_root
+else
+    case "$1" in
+        -r|--relative)
+            git_root_rel
+            ;;
+        *)
+            git_root
+            ;;
+    esac
+fi

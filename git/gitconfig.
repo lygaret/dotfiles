@@ -8,3 +8,7 @@
 [push]
 	default = simple
 
+[github]
+	user = lygaret
+	password = E1pNMkFqtscOrpAmMD1kBCyh
+	oauth-token = 654bed18f1597030e4d579fc6dab7a402c940c94

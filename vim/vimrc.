@@ -13,20 +13,22 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'Shougo/vimproc'
 Plugin 'b4winckler/vim-angry'
-Plugin 'kshenoy/vim-signature'
+" Plugin 'kshenoy/vim-signature'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 
 " languages and such
-Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
+" Plugin 'ludovicchabant/vim-gutentags'
+
+Plugin 'wting/rust.vim'
+
+Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
 " Plugin 'wookiehangover/jshint.vim'
-Plugin 'wting/rust.vim'
 
 " color themes
 Plugin 'gregsexton/Atom'
@@ -53,7 +55,7 @@ set numberwidth=3
 if has('gui_running')
     colorscheme flattown
 
-    set guifont=Inconsolata\ Medium\ 16
+    set guifont=Fira\ Mono\ 9
     set guioptions-=m
     set guioptions-=T
     set guioptions-=l
@@ -63,6 +65,8 @@ endif
 """""""""" plugin config
 let g:neocomplete#enable_at_startup = 1
 let g:agprg="ag --column --smart-case --literal --follow"
+
+set wildignore+=node_modules/**
 
 """""""""" mappings
 let mapleader = "\<Space>"
@@ -93,3 +97,12 @@ augroup vimrc
 	au BufWritePost .vimrc,vimrc.,vimrc.symlink so $MYVIMRC
 augroup end
 
+" get the syntax stack at the cursor
+nmap <Leader>sI :call <SID>SynStack()<CR>
+
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

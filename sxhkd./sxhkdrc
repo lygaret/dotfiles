@@ -30,7 +30,7 @@ alt + Return
     urxvt
 
 alt + space
-    lighthouse | sh
+    launch
 
 ### desktops
 
@@ -57,16 +57,34 @@ alt + d ; alt + c
 
     # close the current window
 alt + w ; q
+    bspc window -c
+
+    # force close the current window
+alt + w ; alt + q
     bspc window -k
 
     # toggle between last windows
 alt + w ; alt + w
     bspc window -f last
 
+    # toggle floating
+alt + w ; space
+    bspc window -t floating
+
+    # toggle psuedo_tiled
+alt + w ; alt + space
+    bspc window -t psuedo_tiled
+
 # extra keys
 
 {_,shift + }XF86MonBrightness{Down,Up}
     backlight { -dec 5, -dec 15, -inc 5, -inc 15 }
+
+{_,shift + }XF86Audio{Lower,Raise}Volume
+    amixer sset Master { 5%-, 15%-, 5%+, 15%+ }
+
+XF86AudioMute
+    amixer sset Master toggle
 
 # mouse actions
 

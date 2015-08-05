@@ -1,0 +1,11 @@
+#!/bin/sh
+
+FILE=`mktemp`
+trap 'rm -f $FILE' 0 1 2 3 15
+
+(
+    echo 'cat <<END_OF_TEXT' > $FILE
+    cat "$@"                >> $FILE
+    echo 'END_OF_TEXT'      >> $FILE
+    sh $FILE
+)

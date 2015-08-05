@@ -1,27 +1,8 @@
 #!/bin/sh
 
-COLOR_ACTIVE_MONITOR_FG='#FF34322E'
-COLOR_ACTIVE_MONITOR_BG='#0058C5F1'
-COLOR_INACTIVE_MONITOR_FG='#FF58C5F1'
-COLOR_INACTIVE_MONITOR_BG='#0034322E'
-COLOR_FOCUSED_OCCUPIED_FG='#FFF6F9FF'
-COLOR_FOCUSED_OCCUPIED_BG='#005C5955'
-COLOR_FOCUSED_FREE_FG='#FFF6F9FF'
-COLOR_FOCUSED_FREE_BG='#006D561C'
-COLOR_FOCUSED_URGENT_FG='#FF34322E'
-COLOR_FOCUSED_URGENT_BG='#00F9A299'
-COLOR_OCCUPIED_FG='#FFA3A6AB'
-COLOR_OCCUPIED_BG='#0034322E'
-COLOR_FREE_FG='#FF6F7277'
-COLOR_FREE_BG='#0034322E'
-COLOR_URGENT_FG='#FFF9A299'
-COLOR_URGENT_BG='#0034322E'
-COLOR_LAYOUT_FG='#FFA3A6AB'
-COLOR_LAYOUT_BG='#0034322E'
-COLOR_TITLE_FG='#FFA3A6AB'
-COLOR_TITLE_BG='#0034322E'
-COLOR_STATUS_FG='#FFA3A6AB'
-COLOR_STATUS_BG='#0034322E'
+COLOR_ACTIVE='#FFFFFADF'
+COLOR_INACTIVE='#55FFFADF'
+COLOR_IMPORTANT='#55FFFADF'
 
 num_mon=$(bspc query -M | wc -l)
 
@@ -33,7 +14,7 @@ while read -r line ; do
             ;;
         T*)
             # xtitle output
-            title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+            title="%{F$COLOR_TITLE_FG} ${line#?} %{B-}%{F-}"
             ;;
         X*)
             # arbitrary output
@@ -41,57 +22,44 @@ while read -r line ; do
             ;;
         W*)
             # bspwm internal state
+            IFS=':' && declare -a items=("${line#?}")
+            echo "$items" 1>&2
+
             wm_infos=""
-            IFS=':'
-            set -- ${line#?}
-            while [ $# -gt 0 ] ; do
-                item=$1
+            for item in $items; do
                 name=${item#?}
                 case $item in
                     M*)
                         # active monitor
                         if [ $num_mon -gt 1 ] ; then
-                            wm_infos="$wm_infos %{F$COLOR_ACTIVE_MONITOR_FG}%{B$COLOR_ACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            wm_infos="$wm_infos %{F$COLOR_ACTIVE_MONITOR_FG} ${name} %{B-}%{F-}  "
                         fi
                         ;;
                     m*)
                         # inactive monitor
                         if [ $num_mon -gt 1 ] ; then
-                            wm_infos="$wm_infos %{F$COLOR_INACTIVE_MONITOR_FG}%{B$COLOR_INACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            wm_infos="$wm_infos %{F$COLOR_INACTIVE_MONITOR_FG} ${name} %{B-}%{F-}  "
                         fi
                         ;;
-                    O*)
-                        # focused occupied desktop
-                        wm_infos="${wm_infos}%{F$COLOR_FOCUSED_OCCUPIED_FG}%{B$COLOR_FOCUSED_OCCUPIED_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
-                        ;;
-                    F*)
-                        # focused free desktop
-                        wm_infos="${wm_infos}%{F$COLOR_FOCUSED_FREE_FG}%{B$COLOR_FOCUSED_FREE_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
-                        ;;
-                    U*)
-                        # focused urgent desktop
-                        wm_infos="${wm_infos}%{F$COLOR_FOCUSED_URGENT_FG}%{B$COLOR_FOCUSED_URGENT_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
+                    O*|F*|U*)
+                        # focused desktop
+                        wm_infos="${wm_infos}%{F$COLOR_ACTIVE} ${name} %{F-}"
                         ;;
                     o*)
                         # occupied desktop
-                        wm_infos="${wm_infos}%{F$COLOR_OCCUPIED_FG}%{B$COLOR_OCCUPIED_BG} ${name} %{B-}%{F-}"
-                        ;;
-                    f*)
-                        # free desktop
-                        wm_infos="${wm_infos}%{F$COLOR_FREE_FG}%{B$COLOR_FREE_BG} ${name} %{B-}%{F-}"
+                        wm_infos="${wm_infos}%{F$COLOR_INACTIVE} ${name} %{F-}"
                         ;;
                     u*)
                         # urgent desktop
-                        wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}"
+                        wm_infos="${wm_infos}%{F$COLOR_IMPORTANT} ${name} %{F-}"
                         ;;
-                    L*)
-                        # layout
-                        wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
+                    f*)
+                        # free desktops aren't drawn
                         ;;
                 esac
                 shift
             done
             ;;
     esac
-    printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${sys_infos}"
+    printf "%s\n" "%{l}${wm_infos}%{r}${title}"
 done

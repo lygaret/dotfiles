@@ -1,14 +1,17 @@
 #!/bin/sh
 
 bspc config border_width        0
-bspc config window_gap          24
+bspc config window_gap          8
 
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 m c
+bspc monitor LVDS1 -d 1 2 3 4 5 m c
+bspc monitor VGA1 -d 6 7 8 9
 
 $DOTFILES/bspwm./panel &
+trayer --edge top --align right --distancefrom top --distance 8 --padding 4 --heighttype pixel --height 24 --widthtype request --transparent true --alpha 255 --expand false --margin 8 &
+
 dunst &

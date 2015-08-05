@@ -1,5 +1,5 @@
-normal="%{$fg[green]%}"
-info="%{$fg[blue]%}"
+normal="%{$fg_bold[black]%}"
+info="%{$fg[green]%}"
 warning="%{$fg[yellow]%}"
 danger="%{$fg[red]%}"
 

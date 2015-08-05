@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # arch keeps system level xinitrc.d/* files
-# load them if they're present.
-
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
     for f in /etc/X11/xinit/xinitrc.d/*; do
         [ -x "$f" ] && . "$f"
@@ -10,9 +8,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     unset f
 fi
 
-# keyboard and mouse
+# keyboard and mouse setup
 setxkbmap -variant dvorak -option ctrl:nocaps
-
 xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
@@ -21,16 +18,27 @@ xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 # visual themes
 xrdb -load $DOTFILES/x11/xresources
 
+# startup programs
+compton &
+. ~/.fehbg
+$DOTFILES/bin/backlight restore
+
+/usr/bin/netmon &
+/usr/bin/cbatticon &
+/usr/bin/pnmixer &
+/usr/bin/CopyAgent &
+/usr/bin/dropbox &
+
 # session stuff
 # - systray, applets, copy.com, etc.
 # - ssh-agent?
 # - polkit?
 
-# exec i3
+redshift -b 1.0:0.7 -l 40:-105 &
+xrandr --output VGA1 --mode 1920x1080 --above LVDS1
 
-compton &
-. ~/.fehbg
-$DOTFILES/bin/backlight restore
+# sxhkd &
+# exec bspwm
 
-sxhkd &
-exec bspwm
+exec i3
+#exec awesome

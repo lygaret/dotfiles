@@ -1,0 +1,34 @@
+URxvt.background: [80]#263238
+URxvt.foreground: #ffffff
+
+!black
+*color0:#263238
+*color8:#37474f
+
+!red
+*color1:#f36c60
+*color9:#f36c60
+
+!green
+*color2:#8bc34a
+*color10:#8bc34a
+
+!yellow
+*color3:#fff59d
+*color11:#fff59d
+
+!blue
+*color4:#4dd0e1
+*color12:#4dd0e1
+
+!magenta
+*color5:#b39ddb
+*color13:#b39ddb
+
+!cyan
+*color6:#81d4fa
+*color14:#81d4fa
+
+!white
+*color7:#fffad5
+*color15:#fffad5

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+font="Source Code Pro for Powerline 14"
+prompt="                                          execute: "
+
+j4-dmenu-desktop --dmenu="dmenu -i -dim .9 -y 300 -p 'exec: ' -fn '$font'"

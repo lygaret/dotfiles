@@ -1,27 +1,48 @@
 #! /bin/sh
 
 COLOR_FOREGROUND='#FFFFFFFF'
-COLOR_BACKGROUND='#00000000'
+COLOR_BACKGROUND='#B2030308'
 
-PANEL_FIFO='/tmp/panel-fifo'
-PANEL_HEIGHT=16
-PANEL_FONT_FAMILY="terminus"
+WM_FIFO='/tmp/panel-wm-fifo'
+TRAY_FIFO='/tmp/panel-tray-fifo'
 
+PANEL_HEIGHT=24
+PANEL_PADDING=8
+PANEL_FONT_FAMILY="-*-lime-*-*-*-*-10-*-*-*-*-*-*-*"
+
+# kill this process group when we're killed, no zombies
+trap 'trap - SIGTERM && kill -- -$$' SIGINT SIGTERM EXIT
+
+# only handle one bar running at a time
 if [ $(pgrep -cx panel) -gt 1 ]; then
     printf "%s\n" "the panel is already running." >&2
+    exit 1
 fi
 
-# trap 'trap -TERM; kill 0' INT TERM QUIT EXIT
+[ -e "$WM_FIFO" ] && rm "$WM_FIFO"
+mkfifo "$WM_FIFO"
 
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO"
+[ -e "$WM_FIFO" ] && rm "$WM_FIFO"
+mkfifo "$WM_FIFO"
 
-bspc config top_padding $PANEL_HEIGHT
+# make some room please
+# only one padding because it's got the window gaps already
+bspc config -m primary top_padding $(($PANEL_HEIGHT + $PANEL_PADDING))
 
-bspc control --subscribe > "$PANEL_FIFO" &
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
-clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
-battery -sf 'X%s %i'  > "$PANEL_FIFO" &
+# wm info
+bspc control --subscribe > "$WM_FIFO" &
+xtitle -sf 'T%s' > "$WM_FIFO" &
 
-exec cat "$PANEL_FIFO" | $DOTFILES/bspwm./panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
+# tray info
+clock -sf 'S%a %H:%M' > "$TRAY_FIFO" &
+battery -sf 'S%i'  > "$TRAY_FIFO" &
+volume -sf 'S%s' > "$TRAY_FIFO" &
+essid -sf 'S%s' -w wlp3s0 > "$TRAY_FIFO" &
+
+# display
+$(cat "$WM_FIFO" | $DOTFILES/bspwm./panel_bar | bar -g 500x$PANEL_HEIGHT+$PANEL_PADDING+$PANEL_PADDING -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND") &
+exec cat "$TRAY_FIFO" | $DOTFILES/bspwm./panel_bar | bar -g 800x$PANEL_HEIGHT+$PANEL_PADDING+$PANEL_PADDING -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
+
+
+# exec cat "$PANEL_FIFO" | $DOTFILES/bspwm./panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
 # exec cat "$PANEL_FIFO" | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
