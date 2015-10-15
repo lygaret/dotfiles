@@ -12,7 +12,7 @@ shadow-blue = 0.1960784314;
 shadow-exclude = [ "name = 'Notification'", "class_g = 'Conky'", "class_g ?= 'Notify-osd'", "class_g = 'Cairo-clock'" ];
 shadow-ignore-shaped = true;
 menu-opacity = 0.95;
-inactive-opacity = 0.8;
+inactive-opacity = 0.9;
 active-opacity = 1.0;
 frame-opacity = 0.6;
 inactive-opacity-override = false;
@@ -50,7 +50,7 @@ wintypes :
   };
 };
 blur-background = false;
-blur-background-frame = false;
+blur-background-frame = true;
 no-fading-openclose = true;
 inactive-dim-fixed = false;
 blur-background-fixed = false;

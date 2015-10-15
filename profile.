@@ -6,7 +6,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$DOTFILES/bin:$PATH"
 
 # enable binaries in local node_modules
-export PATH="$PATH:./node_modules/.bin"
+# export PATH="$PATH:./node_modules/.bin"
 
 # rvm
 export RVM_HOME="$HOME/.rvm"
@@ -18,3 +18,6 @@ export PATH="$PATH:/usr/lib/w3m"
 # go is an asshole about paths
 export GOPATH="$HOME/code/golang"
 export PATH="$PATH:$GOPATH/bin"
+
+# cask for emacs
+export PATH="$PATH:$HOME/.local/cask/bin"

@@ -4,3 +4,4 @@ systemd./user/multi-user.target.wants
 /bin/fontlist.c
 \#*
 .#*
+*.swp

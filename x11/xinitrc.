@@ -19,15 +19,16 @@ xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 xrdb -load $DOTFILES/x11/xresources
 
 # startup programs
-compton &
 . ~/.fehbg
 $DOTFILES/bin/backlight restore
+compton &
 
-/usr/bin/netmon &
-/usr/bin/cbatticon &
-/usr/bin/pnmixer &
-/usr/bin/CopyAgent &
+# /usr/bin/netmon &
+# /usr/bin/cbatticon &
+# /usr/bin/pnmixer &
 /usr/bin/dropbox &
+/usr/bin/nm-applet &
+# /usr/bin/mopidy &
 
 # session stuff
 # - systray, applets, copy.com, etc.
@@ -39,6 +40,5 @@ xrandr --output VGA1 --mode 1920x1080 --above LVDS1
 
 # sxhkd &
 # exec bspwm
-
 exec i3
 #exec awesome
