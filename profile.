@@ -1,12 +1,12 @@
 export DOTFILES=`dirname $(readlink $HOME/.profile)`
-export EDITOR=vim
+export EDITOR="emacsclient -c"
 
 # add dotfiles to path
 export PATH="/usr/local/bin:$PATH"
 export PATH="$DOTFILES/bin:$PATH"
 
 # enable binaries in local node_modules
-# export PATH="$PATH:./node_modules/.bin"
+export PATH="$PATH:./node_modules/.bin"
 
 # rvm
 export RVM_HOME="$HOME/.rvm"
@@ -21,3 +21,5 @@ export PATH="$PATH:$GOPATH/bin"
 
 # cask for emacs
 export PATH="$PATH:$HOME/.local/cask/bin"
+
+systemctl --user import-environment
