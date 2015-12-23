@@ -16,19 +16,17 @@ xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
 xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
 
 # visual themes
-xrdb -load $DOTFILES/x11/xresources
+xrdb -I$DOTFILES/x11 -load $DOTFILES/x11/xresources
 
 # startup programs
-. ~/.fehbg
+[[ -f "$HOME/.fehbg" ]] && . "$HOME/.fehbg"
 $DOTFILES/bin/backlight restore
 compton &
 
-# /usr/bin/netmon &
-# /usr/bin/cbatticon &
-# /usr/bin/pnmixer &
-/usr/bin/dropbox &
 /usr/bin/nm-applet &
-# /usr/bin/mopidy &
+/usr/bin/dropbox &
+/usr/bin/spotify &
+/usr/bin/pidgin &
 
 # session stuff
 # - systray, applets, copy.com, etc.

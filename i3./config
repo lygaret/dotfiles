@@ -126,7 +126,7 @@ bar {
 }
 
 bar {
-    status_command py3status -c ~/.dotfiles/i3./i3status.config
+    status_command "bash -c 'py3status -c $DOTFILES/i3./i3status.config'"
     strip_workspace_numbers yes
     tray_output none
     position top
@@ -165,19 +165,15 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-# special "non-contextual" apps
-
-bindsym Mod1+Mod4+m [con_mark="music"] scratchpad show
-for_window [class="Spotify"] mark "music", move scratchpad
-exec spotify
-
-bindsym Mod1+Mod4+c [con_mark="chat"] scratchpad show
-for_window [class="Pidgin" window_role="buddy_list"] mark "chat", move scratchpad
-exec pidgin
-
-# we don't auto start slack, but it'll work like the others
-# bindsym Mod1+Mod4+w [con_mark="slack"] scratchpad show
-# for_window [title="Slack"] mark "slack", move scratchpad
+# per-app window/binds
 
 for_window [class="Skype"] floating enable, border normal
 
+bindsym Mod1+Mod4+m [con_mark="music"] scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad
+
+bindsym Mod1+Mod4+c [con_mark="chat"] scratchpad show
+for_window [class="Pidgin" window_role="buddy_list"] mark "chat", move scratchpad
+
+bindsym Mod1+Mod4+w [con_mark="slack"] scratchpad show
+for_window [title="Slack"] mark "slack", move scratchpad

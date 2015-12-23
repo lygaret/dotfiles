@@ -14,4 +14,4 @@ URxvt.font: xft:Fira Mono:pixelsize=10
 
 !URxvt.background: [90]#161824
 
-#include </home/jonathan/.dotfiles/x11/colors/urnn>
+#include <./colors/urnn>

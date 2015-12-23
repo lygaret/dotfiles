@@ -4,7 +4,7 @@ source $DOTFILES/zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
-antigen bundle colored-man
+# antigen bundle colored-man
 antigen bundle vi-mode
 antigen theme $DOTFILES/zsh local/teensy
 antigen apply
@@ -14,3 +14,4 @@ antigen apply
 
 # aliases
 alias gs='git status'
+alias xrdb-reload='xrdb -I$DOTFILES/x11 -load $DOTFILES/x11/xresources'
