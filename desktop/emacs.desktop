@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=EmacsClient
+Comment=GNU Emacs Client
+Exec=/usr/bin/emacsclient -c %F
+TryExec=emacs
+Icon=emacs2
+Type=Application
+Terminal=false
+StartupNotify=true
